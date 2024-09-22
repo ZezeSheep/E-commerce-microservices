@@ -4,12 +4,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.zezesheep.userapi.dto.UserDTO;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
@@ -18,7 +25,7 @@ public class UserController {
     public static List<UserDTO> usuarios = new ArrayList<>();
 
     @PostConstruct
-    public void initiateList(){
+    public void initiateList() {
         UserDTO eduardo = new UserDTO();
         eduardo.setNome("Eduardo");
         eduardo.setCpf("123");
@@ -49,10 +56,28 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserDTO> getUsers(){
+    public List<UserDTO> getUsers() {
         return usuarios;
     }
 
+    @GetMapping("/{cpf}")
+    public UserDTO getUsersFiltro(@PathVariable String cpf) {
+        return usuarios.stream().filter(userDTO -> userDTO.getCpf().equals(cpf))
+                .findFirst().orElseThrow(() -> new RuntimeException("User not found"));
+    }
 
-    
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserDTO inserir(@RequestBody @Valid UserDTO userDTO){
+        userDTO.setDataCadastro(LocalDateTime.now());
+        usuarios.add(userDTO);
+        return userDTO;
+    }
+
+    @DeleteMapping("/{cpf}")
+    public Boolean remover(@PathVariable String cpf) {
+        return usuarios.removeIf(userDTO -> userDTO.getCpf().equals(cpf));
+        
+    }
+
 }
