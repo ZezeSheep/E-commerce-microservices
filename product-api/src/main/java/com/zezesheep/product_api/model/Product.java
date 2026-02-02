@@ -40,8 +40,8 @@ public class Product {
         product.setDescricao(productDTO.getDescricao());
         product.setPreco(productDTO.getPreco());
         product.setProductIdentifier(productDTO.getProductIdentifier());
-        if(productDTO.getCategoryDTO() != null){
-            product.setCategory(Category.convert(productDTO.getCategoryDTO()));
+        if(productDTO.getCategory() != null){
+            product.setCategory(Category.convert(productDTO.getCategory()));
         }
         return product;
     }

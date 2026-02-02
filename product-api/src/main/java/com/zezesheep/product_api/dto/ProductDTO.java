@@ -25,7 +25,7 @@ public class ProductDTO {
     @NotBlank
     private String productIdentifier;
     @NotNull
-    private CategoryDTO categoryDTO;
+    private CategoryDTO category;
 
     public static ProductDTO convert(Product product){
         ProductDTO productDTO = new ProductDTO();
@@ -33,7 +33,7 @@ public class ProductDTO {
         productDTO.setNome(product.getNome());
         productDTO.setPreco(product.getPreco());
         productDTO.setDescricao(product.getDescricao());
-        productDTO.setCategoryDTO(CategoryDTO.convert(product.getCategory()));
+        productDTO.setCategory(CategoryDTO.convert(product.getCategory()));
         return productDTO;
     }
 }
