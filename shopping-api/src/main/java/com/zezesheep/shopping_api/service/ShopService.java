@@ -1,13 +1,14 @@
 package com.zezesheep.shopping_api.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.zezesheep.shopping_api.dto.ItemDTO;
 import com.zezesheep.shopping_api.dto.ShopDTO;
+import com.zezesheep.shopping_api.dto.ShopReportDTO;
 import com.zezesheep.shopping_api.model.Shop;
 import com.zezesheep.shopping_api.repository.ShopRepository;
 
@@ -41,6 +42,14 @@ public class ShopService {
         Shop shop = Shop.convert(shopDTO);
         shop.setDate(LocalDateTime.now());
         return ShopDTO.convert(shopRepository.save(shop));
+    }
+
+    public List<ShopDTO> getShopsByFilter(LocalDate dataInicio, LocalDate dataFim, Float valorMinimo){
+        return shopRepository.getShopByFilters(dataInicio, dataFim, valorMinimo).stream().map(ShopDTO::convert).toList();
+    }
+
+    public ShopReportDTO getReportByDate(LocalDate dataInicio, LocalDate dataFim){
+        return shopRepository.getReportByDate(dataInicio, dataFim);
     }
     
 }
