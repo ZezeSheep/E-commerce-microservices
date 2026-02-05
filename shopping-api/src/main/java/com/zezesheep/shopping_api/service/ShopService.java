@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.zezesheep.shopping_api.converter.DTOConverter;
 import com.zezesheep.shopping_api.model.Shop;
 import com.zezesheep.shopping_api.repository.ShopRepository;
+import com.zezesheep.shopping_client.dto.ItemDTO;
+import com.zezesheep.shopping_client.dto.ProductDTO;
 import com.zezesheep.shopping_client.dto.ShopDTO;
 import com.zezesheep.shopping_client.dto.ShopReportDTO;
 
@@ -20,6 +22,10 @@ import lombok.RequiredArgsConstructor;
 public class ShopService {
 
     private final ShopRepository shopRepository;
+
+    private final UserService userService;
+
+    private final ProductService productService;
 
     public List<ShopDTO> getAll() {
         return shopRepository.findAll().stream().map(DTOConverter::convert).toList();
@@ -39,10 +45,29 @@ public class ShopService {
     }
 
     public ShopDTO save(ShopDTO shopDTO){
+        if(userService.getUserByCpf(shopDTO.getUserIdentifier()) == null){
+            return null;
+        }
+
+        if(!validateProducts(shopDTO.getItems())){
+            return null;
+        }
+
         shopDTO.setTotal(shopDTO.getItems().stream().map(x -> x.getPrice()).reduce((float) 0, Float::sum));
         Shop shop = Shop.convert(shopDTO);
         shop.setDate(LocalDateTime.now());
         return DTOConverter.convert(shopRepository.save(shop));
+    }
+
+    private boolean validateProducts(List<ItemDTO> items) {
+        for(ItemDTO item : items){
+            ProductDTO product = productService.getProductByIdentifier(item.getProductIdentifier());
+            if(product == null){
+                return false;
+            }
+            item.setPrice(product.getPreco());
+        }
+        return true;
     }
 
     public List<ShopDTO> getShopsByFilter(LocalDate dataInicio, LocalDate dataFim, Float valorMinimo){
