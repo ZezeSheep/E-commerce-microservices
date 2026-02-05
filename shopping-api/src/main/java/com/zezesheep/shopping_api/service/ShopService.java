@@ -7,10 +7,10 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.zezesheep.shopping_api.dto.ShopDTO;
-import com.zezesheep.shopping_api.dto.ShopReportDTO;
 import com.zezesheep.shopping_api.model.Shop;
 import com.zezesheep.shopping_api.repository.ShopRepository;
+import com.zezesheep.userapi.dto.ShopDTO;
+import com.zezesheep.userapi.dto.ShopReportDTO;
 
 import lombok.RequiredArgsConstructor;
 

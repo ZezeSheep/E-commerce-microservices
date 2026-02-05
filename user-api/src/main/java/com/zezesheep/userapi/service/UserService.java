@@ -9,7 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.zezesheep.userapi.dto.UserDTO;
+import com.zezesheep.shopping_client.dto.UserDTO;
+import com.zezesheep.userapi.converter.DTOConverter;
 import com.zezesheep.userapi.model.User;
 import com.zezesheep.userapi.repository.UserRepository;
 
@@ -24,34 +25,34 @@ public class UserService {
 
     public List<UserDTO> getAll(){
         List<User> listUsuarios = userRepository.findAll();
-        return listUsuarios.stream().map(UserDTO::convert).collect(Collectors.toList());
+        return listUsuarios.stream().map(DTOConverter::convert).collect(Collectors.toList());
     }
 
     public UserDTO findById(Long userId){
         User usuario = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        return UserDTO.convert(usuario);
+        return DTOConverter.convert(usuario);
     }
 
     public UserDTO save(UserDTO userDTO){
         userDTO.setDataCadastro(LocalDateTime.now());
         User user = userRepository.save(User.convert(userDTO));
-        return UserDTO.convert(user);
+        return DTOConverter.convert(user);
     }
 
     public UserDTO delete(long userId){
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         userRepository.delete(user);
-        return UserDTO.convert(user);
+        return DTOConverter.convert(user);
     }
 
     public UserDTO findByCpf(String cpf){
         User user = userRepository.findByCpf(cpf);
-        return user == null ? null : UserDTO.convert(user);
+        return user == null ? null : DTOConverter.convert(user);
     }
 
     public List<UserDTO> queryByName(String name){
         List<User> usuarios = userRepository.queryByNomeLike(name);
-        return usuarios.stream().map(UserDTO::convert).collect(Collectors.toList());
+        return usuarios.stream().map(DTOConverter::convert).collect(Collectors.toList());
     }
 
     public UserDTO editUser(long userId, UserDTO userDTO){
@@ -67,12 +68,12 @@ public class UserService {
         }
 
         user = userRepository.save(user);
-        return UserDTO.convert(user);
+        return DTOConverter.convert(user);
     }
 
     public Page<UserDTO> getAllPage(Pageable page){
         Page<User> users = userRepository.findAll(page);
-        return users.map(UserDTO::convert);
+        return users.map(DTOConverter::convert);
     }
     
 }

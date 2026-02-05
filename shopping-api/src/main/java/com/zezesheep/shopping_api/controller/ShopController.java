@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zezesheep.shopping_api.dto.ShopDTO;
-import com.zezesheep.shopping_api.dto.ShopReportDTO;
 import com.zezesheep.shopping_api.service.ShopService;
+import com.zezesheep.userapi.dto.ShopDTO;
+import com.zezesheep.userapi.dto.ShopReportDTO;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

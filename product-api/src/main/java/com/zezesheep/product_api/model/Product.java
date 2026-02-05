@@ -2,7 +2,7 @@ package com.zezesheep.product_api.model;
 
 
 
-import com.zezesheep.product_api.dto.ProductDTO;
+import com.zezesheep.shopping_client.dto.ProductDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

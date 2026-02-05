@@ -1,6 +1,6 @@
 package com.zezesheep.product_api.model;
 
-import com.zezesheep.product_api.dto.CategoryDTO;
+import com.zezesheep.shopping_client.dto.CategoryDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

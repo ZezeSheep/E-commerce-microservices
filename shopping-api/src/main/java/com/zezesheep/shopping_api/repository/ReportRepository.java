@@ -3,8 +3,8 @@ package com.zezesheep.shopping_api.repository;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.zezesheep.shopping_api.dto.ShopReportDTO;
 import com.zezesheep.shopping_api.model.Shop;
+import com.zezesheep.userapi.dto.ShopReportDTO;
 
 public interface ReportRepository {
 

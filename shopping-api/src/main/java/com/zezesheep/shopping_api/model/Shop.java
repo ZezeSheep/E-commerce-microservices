@@ -3,7 +3,7 @@ package com.zezesheep.shopping_api.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.zezesheep.shopping_api.dto.ShopDTO;
+import com.zezesheep.userapi.dto.ShopDTO;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;

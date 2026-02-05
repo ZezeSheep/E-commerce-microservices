@@ -1,13 +1,5 @@
 package com.zezesheep.product_api.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
-import com.zezesheep.product_api.dto.ProductDTO;
-import com.zezesheep.product_api.service.ProductService;
-
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.zezesheep.product_api.service.ProductService;
+import com.zezesheep.shopping_client.dto.ProductDTO;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor

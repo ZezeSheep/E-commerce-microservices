@@ -1,4 +1,4 @@
-package com.zezesheep.shopping_api.dto;
+package com.zezesheep.shopping_client.dto;
 
 import java.math.BigInteger;
 

@@ -2,7 +2,7 @@ package com.zezesheep.userapi.model;
 
 import java.time.LocalDateTime;
 
-import com.zezesheep.userapi.dto.UserDTO;
+import com.zezesheep.shopping_client.dto.UserDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
