@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ShopReportDTO {
 
-    private BigInteger count;
+    private Long count;
     private Double total;
     private Double mean;
     

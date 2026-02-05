@@ -55,10 +55,18 @@ public class ReportRepositoryImpl implements ReportRepository {
         query.setParameter("dataFim", dataFim.atTime(23,59));
         Object[] result = (Object[]) query.getSingleResult();
         ShopReportDTO shopReportDTO = new ShopReportDTO();
-        shopReportDTO.setCount((BigInteger) result[0]);
-        shopReportDTO.setTotal((Double) result[1]);
-        shopReportDTO.setMean((Double) result[2]);
+        shopReportDTO.setCount(zeroIfNull((Long) result[0]));
+        shopReportDTO.setTotal(zeroIfNull((Double) result[1]));
+        shopReportDTO.setMean(zeroIfNull((Double) result[2]));
         return shopReportDTO;
 
+    }
+
+    private Double zeroIfNull(Double value) {
+        return value == null ? 0.0 : value;
+    }
+
+    private Long zeroIfNull(Long value) {
+        return value == null ? 0 : value;
     }
 }
