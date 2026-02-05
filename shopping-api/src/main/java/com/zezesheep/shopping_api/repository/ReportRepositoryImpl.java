@@ -1,11 +1,10 @@
 package com.zezesheep.shopping_api.repository;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 
 import com.zezesheep.shopping_api.model.Shop;
-import com.zezesheep.userapi.dto.ShopReportDTO;
+import com.zezesheep.shopping_client.dto.ShopReportDTO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

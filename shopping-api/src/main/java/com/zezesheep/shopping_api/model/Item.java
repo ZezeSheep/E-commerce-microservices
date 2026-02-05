@@ -1,6 +1,6 @@
 package com.zezesheep.shopping_api.model;
 
-import com.zezesheep.userapi.dto.ItemDTO;
+import com.zezesheep.shopping_client.dto.ItemDTO;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
