@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.zezesheep.shopping_client.dto.ProductDTO;
+import com.zezesheep.shopping_client.exception.ProductNotFoundException;
 
 @Service
 public class ProductService {
@@ -16,7 +17,7 @@ public class ProductService {
             return webClient.get().uri("/product/{productIdentifier}", productIdentifier).retrieve().bodyToMono(ProductDTO.class).block();
         }
         catch(Exception e){
-            throw new RuntimeException("Product not found", e);
+            throw new ProductNotFoundException();
         }
     }
     

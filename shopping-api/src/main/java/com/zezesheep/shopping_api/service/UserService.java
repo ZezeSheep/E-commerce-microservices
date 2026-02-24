@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.zezesheep.shopping_client.dto.UserDTO;
+import com.zezesheep.shopping_client.exception.UserNotFoundException;
 
 @Service
 public class UserService {
@@ -18,7 +19,7 @@ public class UserService {
             return webClient.get().uri("/user/{cpf}/cpf", cpf).retrieve().bodyToMono(UserDTO.class).block();
         }
         catch(Exception e){
-            throw new RuntimeException("User not found", e);
+            throw new UserNotFoundException();
         }
     }
 }
