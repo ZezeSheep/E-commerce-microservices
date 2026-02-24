@@ -11,8 +11,11 @@ import org.springframework.stereotype.Service;
 
 import com.zezesheep.product_api.converter.DTOConverter;
 import com.zezesheep.product_api.model.Product;
+import com.zezesheep.product_api.repository.CategoryRepository;
 import com.zezesheep.product_api.repository.ProductRepository;
 import com.zezesheep.shopping_client.dto.ProductDTO;
+import com.zezesheep.shopping_client.exception.CategoryNotFoundException;
+import com.zezesheep.shopping_client.exception.ProductNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +25,9 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public List<ProductDTO> getAll(){
         List<Product> products = productRepository.findAll();
@@ -35,10 +41,19 @@ public class ProductService {
 
     public ProductDTO findByProductIdentifier(String productIdentifier){
         Product product = productRepository.findByProductIdentifier(productIdentifier);
-        return product == null ? null : DTOConverter.convert(product);
+        if(product != null){
+            return DTOConverter.convert(product);
+        }
+        else{
+            throw new ProductNotFoundException();
+        }
     }
 
     public ProductDTO save(ProductDTO productDTO){
+        Boolean existsCategory = categoryRepository.existsById(productDTO.getCategory().getId());
+        if(!existsCategory){
+            throw new CategoryNotFoundException();
+        }
         Product product = productRepository.save(Product.convert(productDTO));
         return DTOConverter.convert(product);
     }
@@ -47,6 +62,9 @@ public class ProductService {
         Optional<Product> productOptional = productRepository.findById(productId);
         if(productOptional.isPresent()){
             productRepository.delete(productOptional.get());
+        }
+        else{
+            throw new ProductNotFoundException();
         }
     }
 

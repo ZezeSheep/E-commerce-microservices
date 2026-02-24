@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.zezesheep.shopping_client.dto.UserDTO;
+import com.zezesheep.shopping_client.exception.UserNotFoundException;
 import com.zezesheep.userapi.converter.DTOConverter;
 import com.zezesheep.userapi.model.User;
 import com.zezesheep.userapi.repository.UserRepository;
@@ -47,7 +48,12 @@ public class UserService {
 
     public UserDTO findByCpf(String cpf){
         User user = userRepository.findByCpf(cpf);
-        return user == null ? null : DTOConverter.convert(user);
+        if (user == null) {
+            throw new UserNotFoundException();   
+        }
+        else {
+            return DTOConverter.convert(user);
+        }
     }
 
     public List<UserDTO> queryByName(String name){
