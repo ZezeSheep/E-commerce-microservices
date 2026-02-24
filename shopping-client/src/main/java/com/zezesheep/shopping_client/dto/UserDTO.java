@@ -23,5 +23,6 @@ public class UserDTO {
     private String email;
     private String telefone;
     private LocalDateTime dataCadastro;
+    private String key;
     
 }

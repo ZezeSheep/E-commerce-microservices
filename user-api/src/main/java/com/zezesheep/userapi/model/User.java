@@ -34,6 +34,8 @@ public class User {
     private String email;
 
     private String telefone;
+
+    private String key;
     
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
@@ -46,6 +48,7 @@ public class User {
         user.setEndereco(userDTO.getEndereco());
         user.setEmail(userDTO.getEmail());
         user.setDataCadastro(userDTO.getDataCadastro());
+        user.setKey(userDTO.getKey());
         return user;
     }
     

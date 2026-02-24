@@ -13,10 +13,10 @@ public class UserService {
 
     private final String userAPIUrl = "http://localhost:8080";
     
-    public UserDTO getUserByCpf(String cpf){
+    public UserDTO getUserByCpf(String cpf, String key){
         try{
             WebClient webClient = WebClient.builder().baseUrl(userAPIUrl).build();
-            return webClient.get().uri("/user/{cpf}/cpf", cpf).retrieve().bodyToMono(UserDTO.class).block();
+            return webClient.get().uri("/user/" +cpf + "/cpf?key=" + key).retrieve().bodyToMono(UserDTO.class).block();
         }
         catch(Exception e){
             throw new UserNotFoundException();

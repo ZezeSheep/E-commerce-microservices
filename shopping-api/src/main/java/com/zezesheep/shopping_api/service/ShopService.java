@@ -44,8 +44,8 @@ public class ShopService {
         return shop.map(DTOConverter::convert).orElse(null);
     }
 
-    public ShopDTO save(ShopDTO shopDTO){
-        if(userService.getUserByCpf(shopDTO.getUserIdentifier()) == null){
+    public ShopDTO save(ShopDTO shopDTO, String key){
+        if(userService.getUserByCpf(shopDTO.getUserIdentifier(), key) == null){
             return null;
         }
 
